@@ -5,3 +5,4 @@ export { default as RequestStatusComponent } from './src/component/request-statu
 export * from './src/context/index';
 export { ProductCompareService } from './src/services/product-service';
 export * from './src/types';
+export { RequestStatus } from './src/component/request-status-component/types';
