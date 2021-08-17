@@ -57,6 +57,7 @@ const useMergeStyles = (style?: CompareDetailComponentStyles): CompareDetailComp
       color: '#094884',
       fontFamily: fonts.medium,
       fontSize: 12,
+      height: 35,
     },
     secondBankTextStyle: {
       paddingTop: 4,
@@ -65,6 +66,7 @@ const useMergeStyles = (style?: CompareDetailComponentStyles): CompareDetailComp
       color: 'white',
       fontFamily: fonts.medium,
       fontSize: 12,
+      height: 35,
     },
     bankContainerStyle: {
       flex: 1,
