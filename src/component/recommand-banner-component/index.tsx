@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { ProductCompareContext } from '@/context';
+import { ProductCompareContext } from '../../context';
 import { RecommandBannerComponentProps, RecommandBannerComponentStyle } from './types';
 import { ThemeContext } from 'react-native-theme-component';
 import useMergeStyles from './styles';
