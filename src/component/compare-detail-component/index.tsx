@@ -38,7 +38,7 @@ const SwitchStatusComponent = (props: CompareDetailComponentProps) => {
           numberOfLines={2}
           style={type === 1 ? styles.firtsBankTextStyle : styles.secondBankTextStyle}
         >
-          {bankName}
+          {`${bankName}\n`}
         </Text>
       </>
     );
