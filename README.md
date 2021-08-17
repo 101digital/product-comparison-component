@@ -1,12 +1,12 @@
 # product-comparison-component
 
-The <b>product-comparison-component</b> is a reusable component which provides way to see Open Banking Product Comaparision in the apps developed by 101 Digital.
+The <b>product-comparison-component</b> is a reusable component which provides way to see Open Banking Product Comaparison in the apps developed by 101 Digital.
 
 ## Features
 
-- Give product comparision information between products
+- Give product comparison information between products
 - Provide all functions to work with `ProductService`.
-- Access to products data, (contain loading state, error state) from wherever in React native app.
+- Access to products data, (contain products state, error state) from wherever in React native app.
 - Customize component's props and styles
 
 ## Installation
@@ -81,23 +81,23 @@ Styles, props, components you can find them in API reference
 
 ### CompareDetailComponent
 
-This component to show information between current product and future product, include: product name, interest rate, comparision rate
+This component to show information between current product and future product, include: product name, interest rate, comparison rate
 
 - Props:
 
-| Name                 | Type                      | Description                                            |
-| :------------------- | :------------------------ | :----------------------------------------------------- |
-| onSwitchPressed      | Function (Required)       | Handle action when user tap request switch button      |
-| actions              | Array string (Required)   | List information can view in the product               |
-| gradientColors       | Array color (Optional)    | Gradient colors for future product background          |
-| onPressedAction      | Function (Optional)       | Handle action when user tap view product's information |
-| componentTitle       | string (Optional)         | Default value is "Switch to save on your home loan"    |
-| benefitTitle         | string (Optional)         | Default value is "Benefits"                            |
-| interestRateTitle    | string (Optional)         | Default value is "Interest rate"                       |
-| comparisionRateTitle | string (Optional)         | Default value is "Comparision rate"                    |
-| showDetailTitle      | string (Optional)         | Default value is "Show more Detail >"                  |
-| requestButtonTitle   | string (Optional)         | Default value is "Request Switch Now"                  |
-| defaultBankImage     | ImageURISource (Optional) | Fallback image if loading bank image is failed         |
+| Name                | Type                      | Description                                            |
+| :------------------ | :------------------------ | :----------------------------------------------------- |
+| onSwitchPressed     | Function (Required)       | Handle action when user tap request switch button      |
+| actions             | Array string (Required)   | List information can view in the product               |
+| gradientColors      | Array color (Optional)    | Gradient colors for future product background          |
+| onPressedAction     | Function (Optional)       | Handle action when user tap view product's information |
+| componentTitle      | string (Optional)         | Default value is "Switch to save on your home loan"    |
+| benefitTitle        | string (Optional)         | Default value is "Benefits"                            |
+| interestRateTitle   | string (Optional)         | Default value is "Interest rate"                       |
+| comparisonRateTitle | string (Optional)         | Default value is "Comparison rate"                     |
+| showDetailTitle     | string (Optional)         | Default value is "Show more Detail >"                  |
+| requestButtonTitle  | string (Optional)         | Default value is "Request Switch Now"                  |
+| defaultBankImage    | ImageURISource (Optional) | Fallback image if loading bank image is failed         |
 
 - Styles: styles for element inside `CompareDetailComponent` can be found [here](https://github.com/101digital/product-comparison-component/blob/main/src/component/compare-detail-component/types.ts)
 
@@ -142,9 +142,9 @@ Using for show status of switching
 
 ### Add component to the config.json file manually
 
-1. Make sure you synced latest local data in `product-comparision-data.json` into [product-comparision-component.json](https://github.com/101digital/components-data/blob/main/data/product-comparision-component.json). They should be synced once you update
+1. Make sure you synced latest local data in `product-comparison-data.json` into [product-comparison-component.json](https://github.com/101digital/components-data/blob/main/data/product-comparison-component.json). They should be synced once you update
 
-2. Add the product-comparision-component to `components` tags and replate `[data]` with your values. The product-comparision-component have `componentId` is "fddeac89-dae0-40ed-913b-afe990e5c1d7" and it can't be changed.
+2. Add the product-comparison-component to `components` tags and replate `[data]` with your values. The product-comparison-component have `componentId` is "fddeac89-dae0-40ed-913b-afe990e5c1d7" and it can't be changed.
 
 ```
 {
@@ -152,7 +152,7 @@ Using for show status of switching
  "components": [
     {
       "componentId": "fddeac89-dae0-40ed-913b-afe990e5c1d7",
-      "name": "ProductComparisionComponent",
+      "name": "ProductComparisonComponent",
       "isRequired": false,
       "config": {
         "productClient": "[data]",
@@ -163,7 +163,7 @@ Using for show status of switching
 }
 ```
 
-3. Check required dependencies of product-comparision-component inside tag `dependencies` in `config.json`. Make sure tag `dependencies` must have enough below data
+3. Check required dependencies of product-comparison-component inside tag `dependencies` in `config.json`. Make sure tag `dependencies` must have enough below data
 
 ```
 {

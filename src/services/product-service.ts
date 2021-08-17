@@ -9,7 +9,7 @@ export class ProductService {
   constructor() {
     if (ProductService._instance) {
       throw new Error(
-        'Error: Instantiation failed: Use ProductCompareService.getInstance() instead of new.'
+        'Error: Instantiation failed: Use ProductService.getInstance() instead of new.'
       );
     }
     ProductService._instance = this;

@@ -96,7 +96,7 @@ const SwitchStatusComponent = (rootProps: CompareDetailComponentProps) => {
               )}
               <View style={styles.rateSeparatorStyle} />
               {renderItemBenefit(
-                props.comparisionRateTitle ??
+                props.comparisonRateTitle ??
                   i18n?.t('switch_save.lbl_comparison_rate') ??
                   'Comparison rate',
                 (products[0].comparisonRate * 100).toFixed(2),

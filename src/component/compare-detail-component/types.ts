@@ -10,7 +10,7 @@ export type CompareDetailComponentProps = {
     componentTitle?: string;
     benefitTitle?: string;
     interestRateTitle?: string;
-    comparisionRateTitle?: string;
+    comparisonRateTitle?: string;
     showDetailTitle?: string;
     requestButtonTitle?: string;
     defaultBankImage?: ImageURISource;

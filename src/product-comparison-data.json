@@ -1,6 +1,6 @@
 {
   "id": "fddeac89-dae0-40ed-913b-afe990e5c1d7",
-  "name": "ProductComparisionComponent",
+  "name": "ProductComparisonComponent",
   "repository": "https://github.com/101digital/product-comparison-component.git",
   "config": {
     "productClient": "string"
