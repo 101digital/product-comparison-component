@@ -1,24 +1,22 @@
 import { StyleProp, ViewStyle, TextStyle, ImageStyle, ImageURISource } from 'react-native';
+import { ProductDetailModalStyles } from '../product-detail-modal/types';
 
 export type CompareDetailComponentProps = {
-  Root: {
-    props: {
-      onSwitchPressed: () => void;
-      gradientColors?: string[];
-      actions: string[];
-      onPressedAction?: (name: string) => void;
-      componentTitle?: string;
-      benefitTitle?: string;
-      interestRateTitle?: string;
-      comparisionRateTitle?: string;
-      showDetailTitle?: string;
-      requestButtonTitle?: string;
-    };
-    components?: {
-      defaultBankImage?: ImageURISource;
-    };
-    style?: CompareDetailComponentStyles;
+  props: {
+    onSwitchPressed: () => void;
+    gradientColors?: string[];
+    actions: string[];
+    onPressedAction?: (name: string) => void;
+    componentTitle?: string;
+    benefitTitle?: string;
+    interestRateTitle?: string;
+    comparisionRateTitle?: string;
+    showDetailTitle?: string;
+    requestButtonTitle?: string;
+    defaultBankImage?: ImageURISource;
   };
+  style?: CompareDetailComponentStyles;
+  detailModalStyle?: ProductDetailModalStyles;
 };
 
 export type CompareDetailComponentStyles = {

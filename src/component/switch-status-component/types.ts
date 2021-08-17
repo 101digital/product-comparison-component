@@ -6,7 +6,7 @@ export enum RequestStatus {
   failed = 'Failed',
 }
 
-export type RequestStatusComponentStyle = {
+export type SwitchStatusComponentStyle = {
   containerStyle?: StyleProp<ViewStyle>;
   contentContainerStyle?: StyleProp<ViewStyle>;
   titleTextStyle?: StyleProp<TextStyle>;
@@ -15,13 +15,13 @@ export type RequestStatusComponentStyle = {
   iconContainerStyle?: StyleProp<ViewStyle>;
 };
 
-export type RequestStatusComponentProps = {
+export type SwitchStatusComponentProps = {
   status: RequestStatus;
   title?: string;
   message?: string;
   successIcon?: ReactNode;
   failedIcon?: ReactNode;
-  style?: RequestStatusComponentStyle;
+  style?: SwitchStatusComponentStyle;
   confirmTitle?: string;
   onConfirmed: () => void;
 };

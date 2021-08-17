@@ -1,19 +1,15 @@
 import React, { ReactNode } from 'react';
-import { ProductCompareContext, useProductContextValue } from './context';
+import { ProductContext, useProductContextValue } from './context';
 
 export type ProductProviderProps = {
   children: ReactNode;
 };
 
-const ProductCompareProvider = (props: ProductProviderProps) => {
+const ProductProvider = (props: ProductProviderProps) => {
   const { children } = props;
   const productContextData = useProductContextValue();
 
-  return (
-    <ProductCompareContext.Provider value={productContextData}>
-      {children}
-    </ProductCompareContext.Provider>
-  );
+  return <ProductContext.Provider value={productContextData}>{children}</ProductContext.Provider>;
 };
 
-export default ProductCompareProvider;
+export default ProductProvider;

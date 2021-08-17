@@ -1,9 +1,9 @@
-import { ProductCompareService } from '../services/product-service';
+import { ProductService } from '../services/product-service';
 import { Product } from '../types';
 import React, { useCallback, useMemo, useState } from 'react';
 import { isEmpty } from 'lodash';
 
-export interface ProductCompareContextData {
+export interface ProductContextData {
   products: Product[];
   isLoadingProducts: boolean;
   errorLoadProduct?: Error;
@@ -12,7 +12,7 @@ export interface ProductCompareContextData {
   clearProducts: () => void;
 }
 
-export const productDefaultValue: ProductCompareContextData = {
+export const productDefaultValue: ProductContextData = {
   products: [],
   isLoadingProducts: false,
   getProducts: () => null,
@@ -21,10 +21,9 @@ export const productDefaultValue: ProductCompareContextData = {
   clearProducts: () => null,
 };
 
-export const ProductCompareContext =
-  React.createContext<ProductCompareContextData>(productDefaultValue);
+export const ProductContext = React.createContext<ProductContextData>(productDefaultValue);
 
-export function useProductContextValue(): ProductCompareContextData {
+export function useProductContextValue(): ProductContextData {
   const [_products, setProducts] = useState<Product[]>([]);
   const [_isLoadingProducts, setLoadingProducts] = useState(false);
   const [_errorLoadProducts, setErrorLoadProducts] = useState<Error | undefined>(undefined);
@@ -33,7 +32,7 @@ export function useProductContextValue(): ProductCompareContextData {
     async (bankID: number, loanAmount: number, loanTenure: number, productId?: string) => {
       try {
         setLoadingProducts(true);
-        const { data } = await ProductCompareService.instance().compareProduct(
+        const { data } = await ProductService.instance().compareProduct(
           bankID,
           loanAmount,
           loanTenure,

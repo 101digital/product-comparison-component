@@ -3,9 +3,9 @@ import { View, Text } from 'react-native';
 import useMergeStyles from './styles';
 import { ThemeContext, Button } from 'react-native-theme-component';
 import { SuccessIcon, FailedIcon } from '../../assets/images';
-import { RequestStatusComponentProps, RequestStatusComponentStyle, RequestStatus } from './types';
+import { SwitchStatusComponentProps, SwitchStatusComponentStyle, RequestStatus } from './types';
 
-const RequestStatusComponent = (props: RequestStatusComponentProps) => {
+const SwitchStatusComponent = (props: SwitchStatusComponentProps) => {
   const {
     status,
     style,
@@ -17,7 +17,7 @@ const RequestStatusComponent = (props: RequestStatusComponentProps) => {
     confirmTitle,
   } = props;
   const { i18n } = useContext(ThemeContext);
-  const styles: RequestStatusComponentStyle = useMergeStyles(style);
+  const styles: SwitchStatusComponentStyle = useMergeStyles(style);
 
   return (
     <View style={styles.containerStyle}>
@@ -53,4 +53,4 @@ const RequestStatusComponent = (props: RequestStatusComponentProps) => {
   );
 };
 
-export default RequestStatusComponent;
+export default SwitchStatusComponent;

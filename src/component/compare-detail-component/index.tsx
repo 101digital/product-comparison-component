@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { ProductCompareContext } from '../../context';
+import { ProductContext } from '../../context';
 import useMergeStyles from './styles';
 import { CompareDetailComponentProps } from './types';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
@@ -9,13 +9,13 @@ import { isEmpty } from 'lodash';
 import LinearGradient from 'react-native-linear-gradient';
 import ProductDetailModal from '../product-detail-modal';
 
-const SwitchStatusComponent = (props: CompareDetailComponentProps) => {
-  const { Root } = props;
-  const { products } = useContext(ProductCompareContext);
+const SwitchStatusComponent = (rootProps: CompareDetailComponentProps) => {
+  const { props, style, detailModalStyle } = rootProps;
+  const { products } = useContext(ProductContext);
   const { i18n } = useContext(ThemeContext);
   const [showMore, setshowMore] = useState(false);
 
-  const styles = useMergeStyles(Root?.style);
+  const styles = useMergeStyles(style);
 
   if (isEmpty(products)) {
     return <View />;
@@ -31,7 +31,7 @@ const SwitchStatusComponent = (props: CompareDetailComponentProps) => {
         <Image
           resizeMode='contain'
           style={styles.bankImageStyle}
-          fallbackImage={Root.components?.defaultBankImage ?? images.bank}
+          fallbackImage={props?.defaultBankImage ?? images.bank}
           source={{ uri: bankLogo }}
         />
         <Text
@@ -63,7 +63,7 @@ const SwitchStatusComponent = (props: CompareDetailComponentProps) => {
         <ScrollView showsVerticalScrollIndicator={false} style={styles.contentContainerStyle}>
           <View style={styles.titleContainerStyle}>
             <Text style={styles.titleTextStyle}>
-              {Root.props.componentTitle ??
+              {props.componentTitle ??
                 i18n?.t('switch_save.lbl_switch_title') ??
                 'Switch to save on your home loan'}
             </Text>
@@ -75,7 +75,7 @@ const SwitchStatusComponent = (props: CompareDetailComponentProps) => {
             <Text style={styles.nextTextStyle}>{'>>'}</Text>
             <LinearGradient
               style={styles.bankContainerStyle}
-              colors={Root.props.gradientColors ?? ['#1469b8', '#007ef2']}
+              colors={props.gradientColors ?? ['#1469b8', '#007ef2']}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
             >
@@ -84,11 +84,11 @@ const SwitchStatusComponent = (props: CompareDetailComponentProps) => {
           </View>
           <View style={styles.benefitContainerStyle}>
             <Text style={styles.benefitTitleStyle}>
-              {Root.props.benefitTitle ?? i18n?.t('switch_save.lbl_benefits') ?? 'Benefits'}
+              {props.benefitTitle ?? i18n?.t('switch_save.lbl_benefits') ?? 'Benefits'}
             </Text>
             <View style={styles.benefitContentContainerStyle}>
               {renderItemBenefit(
-                Root.props.interestRateTitle ??
+                props.interestRateTitle ??
                   i18n?.t('switch_save.lbl_interest_rate') ??
                   'Interest rate',
                 (parseFloat(products[0].rate) * 100).toFixed(2),
@@ -96,7 +96,7 @@ const SwitchStatusComponent = (props: CompareDetailComponentProps) => {
               )}
               <View style={styles.rateSeparatorStyle} />
               {renderItemBenefit(
-                Root.props.comparisionRateTitle ??
+                props.comparisionRateTitle ??
                   i18n?.t('switch_save.lbl_comparison_rate') ??
                   'Comparison rate',
                 (products[0].comparisonRate * 100).toFixed(2),
@@ -109,7 +109,7 @@ const SwitchStatusComponent = (props: CompareDetailComponentProps) => {
               onPress={onTapShowMoreDetail}
             >
               <Text style={styles.showDetailTextStyle}>
-                {Root.props.showDetailTitle ??
+                {props.showDetailTitle ??
                   i18n?.t('switch_save.btn_show_detail') ??
                   'Show more Details >'}
               </Text>
@@ -119,11 +119,11 @@ const SwitchStatusComponent = (props: CompareDetailComponentProps) => {
         <View style={styles.requestContainerStyle}>
           <Button
             label={
-              Root.props.requestButtonTitle ??
+              props.requestButtonTitle ??
               i18n?.t('switch_save.btn_request_switch') ??
               'Request Switch Now'
             }
-            onPress={Root.props.onSwitchPressed}
+            onPress={props.onSwitchPressed}
           />
         </View>
       </View>
@@ -131,10 +131,11 @@ const SwitchStatusComponent = (props: CompareDetailComponentProps) => {
         isVisible={showMore}
         onClose={() => setshowMore(false)}
         productName={products[1].productName}
-        actions={Root.props.actions}
+        actions={props.actions}
+        style={detailModalStyle}
         onPressedItem={(action) => {
           setshowMore(false);
-          Root.props.onPressedAction?.(action);
+          props.onPressedAction?.(action);
         }}
       />
     </>

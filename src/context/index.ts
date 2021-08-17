@@ -1,2 +1,2 @@
-export { ProductCompareContext } from './context';
-export { default as ProductCompareProvider } from './provider';
+export { ProductContext } from './context';
+export { default as ProductProvider } from './provider';

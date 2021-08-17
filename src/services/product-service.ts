@@ -1,26 +1,26 @@
-type ProductCompareClient = {
-  mortgageClient: any;
+type ProductClient = {
+  productClient: any;
 };
 
-export class ProductCompareService {
-  private static _instance: ProductCompareService = new ProductCompareService();
-  private _mortgageClient?: any;
+export class ProductService {
+  private static _instance: ProductService = new ProductService();
+  private _productClient?: any;
 
   constructor() {
-    if (ProductCompareService._instance) {
+    if (ProductService._instance) {
       throw new Error(
         'Error: Instantiation failed: Use ProductCompareService.getInstance() instead of new.'
       );
     }
-    ProductCompareService._instance = this;
+    ProductService._instance = this;
   }
 
-  public static instance(): ProductCompareService {
-    return ProductCompareService._instance;
+  public static instance(): ProductService {
+    return ProductService._instance;
   }
 
-  public initClients = (clients: ProductCompareClient) => {
-    this._mortgageClient = clients.mortgageClient;
+  public initClients = (clients: ProductClient) => {
+    this._productClient = clients.productClient;
   };
 
   compareProduct = async (
@@ -29,8 +29,8 @@ export class ProductCompareService {
     loanTenure: number,
     productId?: string
   ) => {
-    if (this._mortgageClient) {
-      const response = await this._mortgageClient.get('products/compare', {
+    if (this._productClient) {
+      const response = await this._productClient.get('products/compare', {
         params: {
           bankID,
           productId,
@@ -45,7 +45,7 @@ export class ProductCompareService {
       });
       return response.data;
     } else {
-      throw new Error('Mortgage Client is not registered');
+      throw new Error('Product Client is not registered');
     }
   };
 }
