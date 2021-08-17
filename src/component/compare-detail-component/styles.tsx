@@ -89,7 +89,7 @@ const useMergeStyles = (style?: CompareDetailComponentStyles): CompareDetailComp
       paddingHorizontal: 2,
       fontFamily: fonts.medium,
       fontSize: 15,
-      letterSpacing: -3,
+      letterSpacing: -1,
       color: colors.primaryColor,
     },
     benefitContainerStyle: {

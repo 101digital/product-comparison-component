@@ -17,7 +17,7 @@ const useMergeStyle = (style?: RecommandBannerComponentStyle): RecommandBannerCo
     nextTextStyle: {
       fontFamily: fonts.bold,
       fontSize: 12,
-      letterSpacing: -2.36,
+      letterSpacing: -1,
       color: 'white',
       paddingHorizontal: 8,
       paddingTop: 8,
