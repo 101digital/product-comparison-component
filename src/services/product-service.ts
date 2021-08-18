@@ -1,10 +1,10 @@
 type ProductClient = {
-  productClient: any;
+  mortgageClient: any;
 };
 
 export class ProductService {
   private static _instance: ProductService = new ProductService();
-  private _productClient?: any;
+  private _mortgageClient?: any;
 
   constructor() {
     if (ProductService._instance) {
@@ -20,7 +20,7 @@ export class ProductService {
   }
 
   public initClients = (clients: ProductClient) => {
-    this._productClient = clients.productClient;
+    this._mortgageClient = clients.mortgageClient;
   };
 
   compareProduct = async (
@@ -29,8 +29,8 @@ export class ProductService {
     loanTenure: number,
     productId?: string
   ) => {
-    if (this._productClient) {
-      const response = await this._productClient.get('products/compare', {
+    if (this._mortgageClient) {
+      const response = await this._mortgageClient.get('products/compare', {
         params: {
           bankID,
           productId,
