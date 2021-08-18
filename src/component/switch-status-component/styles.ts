@@ -1,12 +1,12 @@
 import { useThemeFonts } from 'react-native-theme-component';
-import { RequestStatusComponentStyle } from './types';
+import { SwitchStatusComponentStyle } from './types';
 import { StyleSheet } from 'react-native';
 import { defaultsDeep } from 'lodash';
 
-const useMergeStyle = (style?: RequestStatusComponentStyle): RequestStatusComponentStyle => {
+const useMergeStyle = (style?: SwitchStatusComponentStyle): SwitchStatusComponentStyle => {
   const fonts = useThemeFonts();
 
-  const defaultStyle: RequestStatusComponentStyle = StyleSheet.create({
+  const defaultStyle: SwitchStatusComponentStyle = StyleSheet.create({
     containerStyle: {
       flex: 1,
       backgroundColor: 'white',
