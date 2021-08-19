@@ -31,8 +31,16 @@ export function useProductContextValue(): ProductContextData {
   const [_errorLoadComparisons, setErrorLoadComparisons] = useState<Error | undefined>(undefined);
 
   useEffect(() => {
-    console.log('PRODUCT_COMPARISON', _comparisons);
+    if (__DEV__) {
+      console.log('PRODUCT_COMPARISON_DATA', _comparisons);
+    }
   }, [_comparisons]);
+
+  useEffect(() => {
+    if (__DEV__ && _errorLoadComparisons) {
+      console.log('PRODUCT_COMPARISON_ERROR', _errorLoadComparisons);
+    }
+  }, [_errorLoadComparisons]);
 
   const getComparisons = useCallback(
     async (params: CompasionRequestParams[]) => {
@@ -43,10 +51,11 @@ export function useProductContextValue(): ProductContextData {
             param.countryCode,
             param.productCategory
           );
-          const categories: ProductCategory[] = categoriesResp.data;
+          const category = (categoriesResp.data as ProductCategory[]).find(
+            (c) => c.productCategory === param.productCategory
+          );
           let period = 0;
-          if (!isEmpty(categories)) {
-            const category = categories[0];
+          if (category && category.contextualData) {
             period =
               category.contextualData.period.type === 'Months'
                 ? category.contextualData.period.average
