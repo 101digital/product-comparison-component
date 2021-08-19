@@ -7,8 +7,9 @@ import { ThemeContext } from 'react-native-theme-component';
 import useMergeStyles from './styles';
 
 const RecommandBanner = (props: RecommandBannerComponentProps) => {
-  const { gradientColors, onTakeLook, message, formatCurrency, style } = props;
-  const { products } = useContext(ProductContext);
+  const { gradientColors, onTakeLook, message, formatCurrency, style, walletId } = props;
+  const { getProductsByWalletId } = useContext(ProductContext);
+  const products = getProductsByWalletId(walletId);
   const { i18n } = useContext(ThemeContext);
 
   const styles: RecommandBannerComponentStyle = useMergeStyles(style);
