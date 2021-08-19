@@ -3,6 +3,7 @@ import { ProductDetailModalStyles } from '../product-detail-modal/types';
 
 export type CompareDetailComponentProps = {
   props: {
+    walletId: string;
     onSwitchPressed: () => void;
     gradientColors?: string[];
     actions: string[];

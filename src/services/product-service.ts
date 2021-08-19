@@ -1,10 +1,10 @@
 type ProductClient = {
-  mortgageClient: any;
+  productClient: any;
 };
 
 export class ProductService {
   private static _instance: ProductService = new ProductService();
-  private _mortgageClient?: any;
+  private _productClient?: any;
 
   constructor() {
     if (ProductService._instance) {
@@ -20,27 +20,40 @@ export class ProductService {
   }
 
   public initClients = (clients: ProductClient) => {
-    this._mortgageClient = clients.mortgageClient;
+    this._productClient = clients.productClient;
   };
 
-  compareProduct = async (
-    bankID: number,
-    loanAmount: number,
-    loanTenure: number,
-    productId?: string
+  productCompare = async (
+    productId: string,
+    amount: number,
+    loanPeriod: number,
+    bankId: string,
+    productCategory: string,
+    sort?: string
   ) => {
-    if (this._mortgageClient) {
-      const response = await this._mortgageClient.get('products/compare', {
+    if (this._productClient) {
+      const response = await this._productClient.get(`products/${productId}/compare`, {
         params: {
-          bankID,
           productId,
-          productName: '5 year fixed rate Home Loan',
-          productCategory: 'RESIDENTIAL_MORTGAGES',
-          sort: 'rate-asc',
-          lendingRateType: 'FIXED',
-          repaymentType: 'PRINCIPAL_AND_INTEREST',
-          loanAmount,
-          loanTenure,
+          amount,
+          loanPeriod,
+          bankId,
+          productCategory,
+          sort: sort ?? 'RATE_ASC',
+        },
+      });
+      return response.data;
+    } else {
+      throw new Error('Product Client is not registered');
+    }
+  };
+
+  getProductCatefories = async (countryCode: string, internalProductCategory: string) => {
+    if (this._productClient) {
+      const response = await this._productClient.get(`product-categories`, {
+        params: {
+          countryCode,
+          internalProductCategory,
         },
       });
       return response.data;
