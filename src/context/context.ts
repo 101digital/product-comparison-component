@@ -1,6 +1,6 @@
 import { Comparision, CompasionRequestParams, Product, ProductCategory } from './../types';
 import { ProductService } from '../services/product-service';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { isEmpty } from 'lodash';
 
 export interface ProductContextData {
@@ -29,6 +29,10 @@ export function useProductContextValue(): ProductContextData {
   const [_comparisons, setComparisons] = useState<Comparision[]>([]);
   const [_isLoadingComparisons, setLoadingComparison] = useState(false);
   const [_errorLoadComparisons, setErrorLoadComparisons] = useState<Error | undefined>(undefined);
+
+  useEffect(() => {
+    console.log('PRODUCT_COMPARISON', _comparisons);
+  }, [_comparisons]);
 
   const getComparisons = useCallback(
     async (params: CompasionRequestParams[]) => {
