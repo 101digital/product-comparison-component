@@ -31,13 +31,13 @@ export function useProductContextValue(): ProductContextData {
 
   useEffect(() => {
     if (__DEV__) {
-      console.log('PRODUCT_COMPARISON_DATA', _comparisons);
+      console.log('PRODUCT_COMPARISON_DATA', JSON.stringify(_comparisons));
     }
   }, [_comparisons]);
 
   useEffect(() => {
     if (__DEV__ && _errorLoadComparisons) {
-      console.log('PRODUCT_COMPARISON_ERROR', _errorLoadComparisons);
+      console.log('PRODUCT_COMPARISON_ERROR', JSON.stringify(_errorLoadComparisons));
     }
   }, [_errorLoadComparisons]);
 
