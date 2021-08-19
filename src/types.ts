@@ -31,10 +31,6 @@ export interface Product {
   monthlyRepayment: number;
 }
 
-export enum Accounts {
-  productTarget = '6870872',
-}
-
 export interface ContextualData {
   amount: {
     average: number;

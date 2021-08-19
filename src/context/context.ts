@@ -1,7 +1,6 @@
 import { Comparision, CompasionRequestParams, Product, ProductCategory } from './../types';
 import { ProductService } from '../services/product-service';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { isEmpty } from 'lodash';
 
 export interface ProductContextData {
   comparisons: Comparision[];
@@ -44,9 +43,9 @@ export function useProductContextValue(): ProductContextData {
 
   const getComparisons = useCallback(
     async (params: CompasionRequestParams[]) => {
-      try {
-        setLoadingComparison(true);
-        for (const param of params) {
+      setLoadingComparison(true);
+      for (const param of params) {
+        try {
           const categoriesResp = await ProductService.instance().getProductCatefories(
             param.countryCode,
             param.productCategory
@@ -69,12 +68,11 @@ export function useProductContextValue(): ProductContextData {
             param.productCategory
           );
           setComparisons([..._comparisons, { walletId: param.walletId, products: data }]);
+        } catch (error) {
+          setErrorLoadComparisons(error);
         }
-        setLoadingComparison(false);
-      } catch (error) {
-        setLoadingComparison(false);
-        setErrorLoadComparisons(error);
       }
+      setLoadingComparison(false);
     },
     [_comparisons]
   );

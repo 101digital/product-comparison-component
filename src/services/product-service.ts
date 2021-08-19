@@ -34,7 +34,6 @@ export class ProductService {
     if (this._productClient) {
       const response = await this._productClient.get(`products/${productId}/compare`, {
         params: {
-          productId,
           amount,
           loanPeriod,
           bankId,
