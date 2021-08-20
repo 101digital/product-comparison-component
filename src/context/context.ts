@@ -41,44 +41,45 @@ export function useProductContextValue(): ProductContextData {
     }
   }, [_errorLoadComparisons]);
 
-  const getComparisons = useCallback(
-    async (params: CompasionRequestParams[]) => {
-      setLoadingComparison(true);
-      for (const param of params) {
-        try {
-          const categoriesResp = await ProductService.instance().getProductCatefories(
-            param.countryCode,
-            param.productCategory
-          );
-          const category = (categoriesResp.data as ProductCategory[]).find(
-            (c) => c.productCategory === param.productCategory
-          );
-          let period = 24; // default value
-          if (category && category.contextualData) {
-            period =
-              category.contextualData.period.type === 'Months'
-                ? category.contextualData.period.average
-                : category.contextualData.period.average * 12;
-          }
-          const { data } = await ProductService.instance().productCompare(
-            param.productId,
-            param.amount,
-            period,
-            param.bankId,
-            param.productCategory
-          );
-          setComparisons([
-            ..._comparisons,
-            ...[{ walletId: param.walletId, amount: param.amount, period: period, products: data }],
-          ]);
-        } catch (error) {
-          setErrorLoadComparisons(error);
+  const getComparisons = useCallback(async (params: CompasionRequestParams[]) => {
+    setLoadingComparison(true);
+    let _data: Comparision[] = [];
+    for (const param of params) {
+      try {
+        const categoriesResp = await ProductService.instance().getProductCatefories(
+          param.countryCode,
+          param.productCategory
+        );
+        const category = (categoriesResp.data as ProductCategory[]).find(
+          (c) => c.productCategory === param.productCategory
+        );
+        let period = 24; // default value
+        if (category && category.contextualData) {
+          period =
+            category.contextualData.period.type === 'Months'
+              ? category.contextualData.period.average
+              : category.contextualData.period.average * 12;
         }
+        const { data } = await ProductService.instance().productCompare(
+          param.productId,
+          param.amount,
+          period,
+          param.bankId,
+          param.productCategory
+        );
+        _data.push({
+          walletId: param.walletId,
+          amount: param.amount,
+          period: period,
+          products: data,
+        });
+        setComparisons(_data);
+      } catch (error) {
+        setErrorLoadComparisons(error);
       }
-      setLoadingComparison(false);
-    },
-    [_comparisons]
-  );
+    }
+    setLoadingComparison(false);
+  }, []);
 
   const clearComparisonErrors = useCallback(() => {
     setErrorLoadComparisons(undefined);
