@@ -69,7 +69,7 @@ export function useProductContextValue(): ProductContextData {
           );
           setComparisons([
             ..._comparisons,
-            { walletId: param.walletId, amount: param.amount, period: period, products: data },
+            ...[{ walletId: param.walletId, amount: param.amount, period: period, products: data }],
           ]);
         } catch (error) {
           setErrorLoadComparisons(error);
