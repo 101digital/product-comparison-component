@@ -5,7 +5,6 @@ import { CompareDetailComponentProps } from './types';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import { Button, ThemeContext, Image } from 'react-native-theme-component';
 import { images } from '../../assets/images';
-import { isEmpty } from 'lodash';
 import LinearGradient from 'react-native-linear-gradient';
 import ProductDetailModal from '../product-detail-modal';
 
@@ -20,7 +19,7 @@ const SwitchStatusComponent = (rootProps: CompareDetailComponentProps) => {
 
   const styles = useMergeStyles(style);
 
-  if (isEmpty(products)) {
+  if (products.length < 2) {
     return <View />;
   }
 

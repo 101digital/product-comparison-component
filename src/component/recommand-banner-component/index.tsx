@@ -11,8 +11,12 @@ const RecommandBanner = (props: RecommandBannerComponentProps) => {
   const { getComparisonByWalletId } = useContext(ProductContext);
   const { i18n } = useContext(ThemeContext);
 
-  const comparisons = getComparisonByWalletId(props.walletId);
+  const comparisons = getComparisonByWalletId(walletId);
   const products = comparisons?.products ?? [];
+
+  if (products.length < 2) {
+    return <View />;
+  }
 
   const styles: RecommandBannerComponentStyle = useMergeStyles(style);
 
