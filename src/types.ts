@@ -1,5 +1,6 @@
 export interface CompasionRequestParams {
   walletId: string;
+  accountSubtype: string;
   productId: string;
   amount: number;
   bankId: string;
@@ -11,6 +12,7 @@ export interface Comparision {
   walletId: string;
   amount: number;
   period: number;
+  accountSubtype: string;
   products: Product[];
 }
 export interface Product {

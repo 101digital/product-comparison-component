@@ -14,7 +14,7 @@
   "texts": {
     "switch_save": {
       "btn_request_switch": "Request Switch Now",
-      "lbl_switch_title": "Switch to save on your home loan",
+      "lbl_switch_title": "Switch to save on your %s",
       "lbl_benefits": "Benefits",
       "lbl_interest_rate": "Interest rate",
       "lbl_comparison_rate": "Comparison rate",
@@ -22,7 +22,7 @@
       "msg_switch_successful": "Your switch request has been submitted successfully. We will be in touch with you shortly.",
       "btn_confirm_status": "Ok",
       "btn_show_detail": "Show more Details >",
-      "msg_switch_now": "You can save approximately %s per month by switching your mortgage to %d.",
+      "msg_switch_now": "You can save approximately %a per month by switching your %b to %c.",
       "btn_take_look": "Take a look"
     }
   }

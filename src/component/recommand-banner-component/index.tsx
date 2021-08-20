@@ -22,6 +22,19 @@ const RecommandBanner = (props: RecommandBannerComponentProps) => {
 
   const _decorationLine = 'underline';
 
+  const getMessage = () => {
+    if (message) {
+      return message;
+    }
+    return (
+      i18n?.t('switch_save.msg_switch_now') ??
+      'You can save approximately %a per month by switching your %b to %c.'
+    )
+      .replace('%a', formatCurrency(products[0].monthlyRepayment - products[1].monthlyRepayment))
+      .replace('%b', comparisons?.accountSubtype ?? '')
+      .replace('%c', products[1]?.bankName || '');
+  };
+
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onTakeLook}>
       <LinearGradient
@@ -32,16 +45,7 @@ const RecommandBanner = (props: RecommandBannerComponentProps) => {
       >
         <View style={styles.messageContainerStyle}>
           <Text style={styles.messageTextStyle}>
-            {(
-              message ??
-              i18n?.t('switch_save.msg_switch_now') ??
-              'You can save approximately %s per month by switching your mortgage to %d.'
-            )
-              .replace(
-                '%s',
-                formatCurrency(products[0].monthlyRepayment - products[1].monthlyRepayment)
-              )
-              .replace('%d', products[1]?.bankName || '')}{' '}
+            {getMessage()}{' '}
             <Text style={{ textDecorationLine: _decorationLine }}>
               {i18n?.t('switch_save.btn_take_look') ?? 'Take a look'}
             </Text>

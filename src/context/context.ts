@@ -69,12 +69,15 @@ export function useProductContextValue(): ProductContextData {
         );
         const _currentProduct = data.find((d: Product) => d.currentProduct);
         const _nextProduct = data.find((d: Product) => !d.currentProduct);
-        _data.push({
-          walletId: param.walletId,
-          amount: param.amount,
-          period: period,
-          products: [_currentProduct, _nextProduct],
-        });
+        if (_currentProduct && _nextProduct) {
+          _data.push({
+            walletId: param.walletId,
+            accountSubtype: param.accountSubtype,
+            amount: param.amount,
+            period: period,
+            products: [_currentProduct, _nextProduct],
+          });
+        }
         setComparisons(_data);
       } catch (error) {
         setErrorLoadComparisons(error);

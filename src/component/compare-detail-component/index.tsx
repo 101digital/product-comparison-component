@@ -59,16 +59,22 @@ const SwitchStatusComponent = (rootProps: CompareDetailComponentProps) => {
     );
   };
 
+  const getTitle = () => {
+    if (props.componentTitle) {
+      return props.componentTitle;
+    }
+    return (i18n?.t('switch_save.lbl_switch_title') ?? 'Switch to save on your %s').replace(
+      '%s',
+      comparisons?.accountSubtype ?? ''
+    );
+  };
+
   return (
     <>
       <View style={styles.containerStyle}>
         <ScrollView showsVerticalScrollIndicator={false} style={styles.contentContainerStyle}>
           <View style={styles.titleContainerStyle}>
-            <Text style={styles.titleTextStyle}>
-              {props.componentTitle ??
-                i18n?.t('switch_save.lbl_switch_title') ??
-                'Switch to save on your home loan'}
-            </Text>
+            <Text style={styles.titleTextStyle}>{getTitle()}</Text>
           </View>
           <View style={styles.inforContainerStyle}>
             <View style={styles.bankContainerStyle}>
