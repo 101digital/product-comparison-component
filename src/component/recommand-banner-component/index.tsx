@@ -33,7 +33,7 @@ const RecommandBanner = (props: RecommandBannerComponentProps) => {
             )
               .replace(
                 '%s',
-                formatCurrency(products[0].monthlyRepayment - products[1].monthlyRepayment, 'USD')
+                formatCurrency(products[0].monthlyRepayment - products[1].monthlyRepayment)
               )
               .replace('%d', products[1]?.bankName || '')}{' '}
             <Text style={{ textDecorationLine: _decorationLine }}>
