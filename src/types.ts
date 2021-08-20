@@ -21,7 +21,7 @@ export interface Product {
   rate: string;
   productUrl: string;
   currentProduct: boolean;
-  comparisonRate: number;
+  comparisonRate?: number;
   productName: string;
   bankLogo: string;
   eligibiltyURL: string;

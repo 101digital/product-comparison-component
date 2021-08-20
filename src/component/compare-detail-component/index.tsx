@@ -97,13 +97,15 @@ const SwitchStatusComponent = (rootProps: CompareDetailComponentProps) => {
                 (parseFloat(products[1].rate) * 100).toFixed(2)
               )}
               <View style={styles.rateSeparatorStyle} />
-              {renderItemBenefit(
-                props.comparisonRateTitle ??
-                  i18n?.t('switch_save.lbl_comparison_rate') ??
-                  'Comparison rate',
-                (products[0].comparisonRate * 100).toFixed(2),
-                (products[1].comparisonRate * 100).toFixed(2)
-              )}
+              {products[0].comparisonRate &&
+                products[1].comparisonRate &&
+                renderItemBenefit(
+                  props.comparisonRateTitle ??
+                    i18n?.t('switch_save.lbl_comparison_rate') ??
+                    'Comparison rate',
+                  (products[0].comparisonRate * 100).toFixed(2),
+                  (products[1].comparisonRate * 100).toFixed(2)
+                )}
             </View>
             <TouchableOpacity
               activeOpacity={0.8}
