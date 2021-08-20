@@ -93,8 +93,8 @@ const SwitchStatusComponent = (rootProps: CompareDetailComponentProps) => {
                 props.interestRateTitle ??
                   i18n?.t('switch_save.lbl_interest_rate') ??
                   'Interest rate',
-                (parseFloat(products[0].rate) * 100).toFixed(2),
-                (parseFloat(products[1].rate) * 100).toFixed(2)
+                parseFloat(products[0].rate).toFixed(2),
+                parseFloat(products[1].rate).toFixed(2)
               )}
               <View style={styles.rateSeparatorStyle} />
               {products[0].comparisonRate &&
@@ -103,8 +103,8 @@ const SwitchStatusComponent = (rootProps: CompareDetailComponentProps) => {
                   props.comparisonRateTitle ??
                     i18n?.t('switch_save.lbl_comparison_rate') ??
                     'Comparison rate',
-                  (products[0].comparisonRate * 100).toFixed(2),
-                  (products[1].comparisonRate * 100).toFixed(2)
+                  products[0].comparisonRate.toFixed(2),
+                  products[1].comparisonRate.toFixed(2)
                 )}
             </View>
             <TouchableOpacity
