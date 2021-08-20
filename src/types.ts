@@ -9,6 +9,8 @@ export interface CompasionRequestParams {
 }
 export interface Comparision {
   walletId: string;
+  amount: number;
+  period: number;
   products: Product[];
 }
 export interface Product {

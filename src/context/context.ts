@@ -53,7 +53,7 @@ export function useProductContextValue(): ProductContextData {
           const category = (categoriesResp.data as ProductCategory[]).find(
             (c) => c.productCategory === param.productCategory
           );
-          let period = 0;
+          let period = 24; // default value
           if (category && category.contextualData) {
             period =
               category.contextualData.period.type === 'Months'
@@ -67,7 +67,10 @@ export function useProductContextValue(): ProductContextData {
             param.bankId,
             param.productCategory
           );
-          setComparisons([..._comparisons, { walletId: param.walletId, products: data }]);
+          setComparisons([
+            ..._comparisons,
+            { walletId: param.walletId, amount: param.amount, period: period, products: data },
+          ]);
         } catch (error) {
           setErrorLoadComparisons(error);
         }
