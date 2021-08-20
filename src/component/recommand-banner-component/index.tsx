@@ -8,9 +8,11 @@ import useMergeStyles from './styles';
 
 const RecommandBanner = (props: RecommandBannerComponentProps) => {
   const { gradientColors, onTakeLook, message, formatCurrency, style, walletId } = props;
-  const { getProductsByWalletId } = useContext(ProductContext);
-  const products = getProductsByWalletId(walletId);
+  const { getComparisonByWalletId } = useContext(ProductContext);
   const { i18n } = useContext(ThemeContext);
+
+  const comparisons = getComparisonByWalletId(props.walletId);
+  const products = comparisons?.products ?? [];
 
   const styles: RecommandBannerComponentStyle = useMergeStyles(style);
 

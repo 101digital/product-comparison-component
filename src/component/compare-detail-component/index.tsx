@@ -11,11 +11,12 @@ import ProductDetailModal from '../product-detail-modal';
 
 const SwitchStatusComponent = (rootProps: CompareDetailComponentProps) => {
   const { props, style, detailModalStyle } = rootProps;
-  const { getProductsByWalletId } = useContext(ProductContext);
+  const { getComparisonByWalletId } = useContext(ProductContext);
   const { i18n } = useContext(ThemeContext);
   const [showMore, setshowMore] = useState(false);
 
-  const products = getProductsByWalletId(props.walletId);
+  const comparisons = getComparisonByWalletId(props.walletId);
+  const products = comparisons?.products ?? [];
 
   const styles = useMergeStyles(style);
 

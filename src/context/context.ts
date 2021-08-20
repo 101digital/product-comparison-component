@@ -9,7 +9,7 @@ export interface ProductContextData {
   errorLoadComparison?: Error;
   clearComparisonErrors: () => void;
   clearComparisons: () => void;
-  getProductsByWalletId: (walletId: string) => Product[];
+  getComparisonByWalletId: (walletId: string) => Comparision | undefined;
 }
 
 export const productDefaultValue: ProductContextData = {
@@ -19,7 +19,7 @@ export const productDefaultValue: ProductContextData = {
   errorLoadComparison: undefined,
   clearComparisonErrors: () => null,
   clearComparisons: () => null,
-  getProductsByWalletId: () => [],
+  getComparisonByWalletId: () => undefined,
 };
 
 export const ProductContext = React.createContext<ProductContextData>(productDefaultValue);
@@ -88,13 +88,10 @@ export function useProductContextValue(): ProductContextData {
     setComparisons([]);
   }, []);
 
-  const getProductsByWalletId = useCallback(
+  const getComparisonByWalletId = useCallback(
     (walletId: string) => {
       const comparison = _comparisons.find((c) => c.walletId === walletId);
-      if (comparison) {
-        return comparison.products;
-      }
-      return [];
+      return comparison;
     },
     [_comparisons]
   );
@@ -107,7 +104,7 @@ export function useProductContextValue(): ProductContextData {
       getComparisons,
       clearComparisonErrors,
       clearComparisons,
-      getProductsByWalletId,
+      getComparisonByWalletId,
     }),
     [_comparisons, _isLoadingComparisons, _errorLoadComparisons]
   );
