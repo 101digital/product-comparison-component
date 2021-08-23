@@ -77,7 +77,11 @@ export function useProductContextValue(): ProductContextData {
         } else {
           _nextProduct = data.find((p: Product) => !p.currentProduct);
         }
-        if (_currentProduct && _nextProduct) {
+        if (
+          _currentProduct &&
+          _nextProduct &&
+          _currentProduct.productId !== _nextProduct.productId
+        ) {
           _data.push({
             walletId: param.walletId,
             accountSubtype: param.accountSubtype,
