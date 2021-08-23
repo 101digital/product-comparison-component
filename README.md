@@ -47,7 +47,7 @@ import { ProductProvider, ProductService } from 'product-comparison-component';
 
 ```javascript
 ProductService.instance().initClients({
-  mortgageClient: mortgageApiClient,
+  productClient: productApiClient,
 });
 ```
 
@@ -71,6 +71,10 @@ This component provides only one main contexts: `ProductContext`
 
 To access to data, error and function from these contexts, you can use `useContext` inside a React Component.
 
+All context data and functions details can be found [here](https://github.com/101digital/product-comparison-component/blob/main/src/context/context.ts)
+
+
+
 ### Use component inside screen
 
 You can place components as a React Node inside your React Native screen. All styles, props are provided by default, you can customize them also. There are some required props, you need provide them if components request
@@ -87,6 +91,7 @@ This component to show information between current product and future product, i
 
 | Name                | Type                      | Description                                            |
 | :------------------ | :------------------------ | :----------------------------------------------------- |
+| walletId     | String (Required)       | Current walletId to get products list      |
 | onSwitchPressed     | Function (Required)       | Handle action when user tap request switch button      |
 | actions             | Array string (Required)   | List information can view in the product               |
 | gradientColors      | Array color (Optional)    | Gradient colors for future product background          |
@@ -115,6 +120,7 @@ That is component using at the bottom of wallet item.
 
 | Name           | Type                   | Description                                                                                                                                |
 | :------------- | :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| walletId | String (Required)    | Current walletId to get products list                                                                                                             |
 | formatCurrency | Function (Required)    | Return formatted amount value                                                                                                              |
 | onTakeLook     | Function (Required)    | Handle action when user take a look                                                                                                        |
 | gradientColors | Array color (Optional) | Gradient colors for background                                                                                                             |
