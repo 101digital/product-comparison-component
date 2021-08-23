@@ -39,6 +39,8 @@ export class ProductService {
           bankId,
           productCategory,
           sort: sort ?? 'RATE_ASC',
+          pageSize: 100,
+          pageNumber: 1,
         },
       });
       return response.data;
