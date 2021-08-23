@@ -47,7 +47,7 @@ import { ProductProvider, ProductService } from 'product-comparison-component';
 
 ```javascript
 ProductService.instance().initClients({
-  mortgageClient: mortgageApiClient,
+  productClient: productApiClient,
 });
 ```
 
