@@ -67,8 +67,16 @@ export function useProductContextValue(): ProductContextData {
           param.bankId,
           param.productCategory
         );
-        const _currentProduct = data.find((d: Product) => d.currentProduct);
-        const _nextProduct = data.find((d: Product) => !d.currentProduct);
+        const _currentProduct = data.find((p: Product) => p.currentProduct);
+        let _nextProduct;
+        if (param.productCategory === 'BUSINESS_LOANS') {
+          _nextProduct = data.find(
+            (p: Product) =>
+              !p.currentProduct && p.productId === '965a7f64-167c-4b26-b8ab-06e90cdb3ff4'
+          );
+        } else {
+          _nextProduct = data.find((p: Product) => !p.currentProduct);
+        }
         if (_currentProduct && _nextProduct) {
           _data.push({
             walletId: param.walletId,
