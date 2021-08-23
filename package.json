@@ -1,6 +1,6 @@
 {
   "name": "product-comparison-component",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "Open Banking Product Comparison",
   "repository": "https://github.com/101digital/product-comparison-component.git",
   "main": "index.ts",

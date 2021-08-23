@@ -1,6 +1,7 @@
 import { Comparision, CompasionRequestParams, Product, ProductCategory } from './../types';
 import { ProductService } from '../services/product-service';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { isEmpty } from 'lodash';
 
 export interface ProductContextData {
   comparisons: Comparision[];
@@ -45,6 +46,9 @@ export function useProductContextValue(): ProductContextData {
     setLoadingComparison(true);
     let _data: Comparision[] = [];
     for (const param of params) {
+      if (isEmpty(param.productId)) {
+        continue;
+      }
       try {
         const categoriesResp = await ProductService.instance().getProductCatefories(
           param.countryCode,
