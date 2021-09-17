@@ -23,11 +23,11 @@ To get more details about how to install private repository, can found here: [ht
 
 This lib also required some dependencies. Ignore any dependency if it already existed in your project.
 
-- The [react-native-theme-component](https://github.com/101digital/react-native-theme-component): Using for base theme styles
+- The Theme Component [react-native-theme-component](https://github.com/101digital/react-native-theme-component): Using for base theme styles
 
-- The [react-native-webview](https://github.com/react-native-webview/react-native-webview): View product information
+- The Webview [react-native-webview](https://github.com/react-native-webview/react-native-webview): View product information
 
-- The [react-native-linear-gradient](https://github.com/react-native-linear-gradient/react-native-linear-gradient): Show gradient background
+- The The linear gradient [react-native-linear-gradient](https://github.com/react-native-linear-gradient/react-native-linear-gradient): Show gradient background
 
 We're done! Now you can run your project.
 
@@ -98,7 +98,7 @@ const { comparisons } = useContext(ProductContext);
 
 Each element in the comparisons includes: `walletId`, `amount`, `period`, `accountSubtype`, `products`
 
-All context data and functions details can be found [here](https://github.com/101digital/product-comparison-component/blob/main/src/context/context.ts)
+All context data and functions details can be found [here](/src/context/context.ts)
 
 ### Use component inside screen
 
@@ -129,13 +129,109 @@ This component to show information between current product and future product, i
 | requestButtonTitle  | string (Optional)         | Default value is "Request Switch Now"                  |
 | defaultBankImage    | ImageURISource (Optional) | Fallback image if loading bank image is failed         |
 
-- Styles: styles for element inside `CompareDetailComponent` can be found [here](https://github.com/101digital/product-comparison-component/blob/main/src/component/compare-detail-component/types.ts)
+- Styles: styles for element inside `CompareDetailComponent` can be found [here](/src/component/compare-detail-component/types.ts)
 
-- Detail modal styles: styles for bottom sheet can be found [here](https://github.com/101digital/product-comparison-component/blob/main/src/component/product-detail-modal/types.ts)
+- Detail modal styles: styles for bottom sheet can be found [here](/src/component/product-detail-modal/types.ts)
+
+- Example
+
+```javascript
+import { ProductContext, CompareDetailComponent } from 'product-comparison-component';
+
+export type SwitchAndSaveScreenParams = {
+  walletId: string,
+};
+
+const SwitchAndSaveScreen = ({ navigation, route }: SwithAndSaveScreenProps) => {
+  const { walletId } = route.params;
+  const { getComparisonByWalletId } = useContext(ProductContext);
+
+  const comparison = getComparisonByWalletId(walletId);
+  const products = comparison?.products ?? [];
+
+  if (isEmpty(products)) {
+    return (
+      <Box flex={1} alignItems="center" justifyContent="center">
+        <Text variant="h3">Empty</Text>
+      </Box>
+    );
+  }
+
+  const showProductDetail = (action: string) => {
+    let url;
+    switch (action) {
+      case 'Product Overview':
+        url = products[1].overviewURL;
+        break;
+      case 'Fee and Pricing':
+        url = products[1].feeAndPricingURL;
+        break;
+      case 'Eligibilty':
+        url = products[1].eligibiltyURL;
+        break;
+      case 'Term and Condition':
+        url = products[1].termsURL;
+        break;
+      default:
+        url = '';
+        break;
+    }
+    navigation.navigate(Route.PRODUCT_DETAIL, { url, title: action });
+  };
+
+  return (
+    <>
+      <SafeAreaView style={styles.container}>
+        <CompareDetailComponent
+          props={{
+            walletId: walletId,
+            onSwitchPressed: () => navigation.navigate(Route.SWITCH_STATUS),
+            actions: ['Product Overview', 'Fee and Pricing', 'Eligibilty', 'Term and Condition'],
+            onPressedAction: showProductDetail,
+          }}
+        />
+      </SafeAreaView>
+    </>
+  );
+};
+
+export default SwitchAndSaveScreen;
+```
 
 ### ProductDetailComponent
 
 Using to show product information such as Product Overvide, Term and Condition... `url` this required for this component
+
+- Example
+
+```javascript
+import { ProductDetailComponent } from 'product-comparison-component';
+
+export type ProductDetailScreenParam = {
+  title: string,
+  url: string,
+};
+
+const ProductDetailScreen = ({ route, navigation }: ProductDetailScreenProps) => {
+  const url = route.params.url;
+  const title = route.params.title;
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ProductDetailComponent url={url} />
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+});
+
+export default ProductDetailScreen;
+```
 
 ### RecommandBannerComponent
 
@@ -151,7 +247,153 @@ That is component using at the bottom of wallet item.
 | gradientColors | Array color (Optional) | Gradient colors for background                                                                                                             |
 | message        | string (Optional)      | Default value is "You can save approximately %s per month by switching your mortgage to %d.". %s and %d can be replaced with correct value |
 
-- Styles for banner can be found [here](https://github.com/101digital/product-comparison-component/blob/main/src/component/recommand-banner-component/types.ts)
+- Styles for banner can be found [here](/src/component/recommand-banner-component/types.ts)
+
+- Example
+
+```javascript
+import { currencyFormatter } from '@/helpers/currency-formatter';
+import {
+  WalletComponent,
+  WalletContext,
+  WalletComponentRefs,
+} from '@banking-component/wallet-component';
+import { AlertModal } from 'react-native-theme-component';
+import { ProductContext, RecommandBannerComponent } from 'product-comparison-component';
+import { AccountLinkingContext } from '@banking-component/account-linking';
+
+const AccountsScreen = (props: AccountScreenProps) => {
+  const { navigation } = props;
+  const { wallets, errorUnlinkWallet, errorUpdatePrimary, clearWalletErrors, errorLinkWallet } =
+    useContext(WalletContext);
+  const { scrollHandler, headerTitleOpacity, navigationBarOpacity } = useCollapsibleHeaderHandler();
+  const accountRef = useRef<WalletComponentRefs>();
+  const { comparisons } = useContext(ProductContext);
+  const { bankImages } = useContext(AccountLinkingContext);
+
+  useEffect(() => {
+    if (!isEmpty(comparisons)) {
+      for (var c of comparisons) {
+        const _wallet = wallets.find((w) => w.walletId === c.walletId);
+        if (_wallet) {
+          accountRef?.current?.showRecommandBanner(_wallet);
+        }
+      }
+    }
+  }, [comparisons.length]);
+
+  const handleAddBankAccountPressed = () => {
+    navigation.navigate(Route.SELECT_BANK);
+  };
+
+  return (
+    <>
+        <SafeAreaView style={styles.container}>
+          <WalletComponent
+            ref={accountRef}
+            Root={{
+              props: {
+                formatCurrency: currencyFormatter,
+                scrollHandler: scrollHandler,
+                bankImages: bankImages,
+              },
+              components: {
+                headerTitle: (
+                  <Animated.View style={{ opacity: headerTitleOpacity }}>
+                    <Text variant="h1" ml="m">
+                      {i18n.t('account.lbl_my_account')}
+                    </Text>
+                  </Animated.View>
+                ),
+              },
+            }}
+            Balance={{
+              style: {
+                titleTextStyle: {
+                  color: '#4DA0F5',
+                },
+                amountTextStyle: {
+                  fontSize: 35,
+                  lineHeight: 53,
+                },
+              },
+            }}
+            WalletItem={{
+              props: {
+                onItemPressed: (wallet) => {
+                  accountRef?.current?.showActionsSheet(wallet);
+                },
+              },
+              components: {
+                recommandBanner: (wallet) => (
+                  <RecommandBannerComponent
+                    walletId={wallet.walletId}
+                    formatCurrency={(amount) => currencyFormatter(amount, wallet.currencyCode)}
+                    onTakeLook={() =>
+                      navigation.navigate(Route.SWITCH_AND_SAVE, {
+                        walletId: wallet.walletId,
+                      })
+                    }
+                  />
+                ),
+              },
+            }}
+            LinkAccountButton={{
+              props: {
+                onLinkAccountPressed: handleAddBankAccountPressed,
+              },
+            }}
+            EmptyWallet={{
+              props: {
+                onLinkAccountPressed: handleAddBankAccountPressed,
+              },
+            }}
+            ActionSheet={{
+              props: {
+                onSetPrimaryPress: (wallet) => {
+                  accountRef?.current?.setAsPrimary(wallet);
+                },
+                onUnlinkPress: (wallet) => {
+                  accountRef?.current?.unlinkWallet(wallet);
+                },
+                onPressViewTransactions: (wallet) => {
+                  navigation.navigate(Route.TRANSACTIONS_TAB, { wallet });
+                },
+              },
+            }}
+          />
+        </SafeAreaView>
+      <AlertModal
+        isVisible={!isEmpty(errorUnlinkWallet?.toString())}
+        title={i18n.t('common.lbl_oop')}
+        leftIcon={<FailedSvg width={18} height={18} fill="red" />}
+        onClose={clearWalletErrors}
+        onConfirmed={clearWalletErrors}
+        message={errorUnlinkWallet?.toString()}
+      />
+      <AlertModal
+        isVisible={!isEmpty(errorUpdatePrimary?.toString())}
+        title={i18n.t('common.lbl_oop')}
+        leftIcon={<FailedSvg width={18} height={18} fill="red" />}
+        onClose={clearWalletErrors}
+        onConfirmed={clearWalletErrors}
+        message={errorUpdatePrimary?.toString()}
+      />
+      <AlertModal
+        isVisible={!isEmpty(errorLinkWallet?.toString())}
+        title={i18n.t('common.lbl_oop')}
+        leftIcon={<FailedSvg width={18} height={18} fill="red" />}
+        onClose={clearWalletErrors}
+        onConfirmed={clearWalletErrors}
+        message={'Account linking was unsuccessful, please try again'}
+      />
+    </>
+  );
+};
+
+export default AccountsScreen;
+
+```
 
 ### SwitchStatusComponent
 
@@ -169,7 +411,35 @@ Using for show status of switching
 | failedIcon   | React Node (Optional)    | Show failed icon when status is `failed`                                                                      |
 | confirmTitle | string (Optional)        | Title of confirm button, default is "OK"                                                                      |
 
-- Styles for this component can be found [here](https://github.com/101digital/product-comparison-component/blob/main/src/component/switch-status-component/types.ts)
+- Styles for this component can be found [here](/src/component/switch-status-component/types.ts)
+
+- Example
+
+```javascript
+import { SwitchStatusComponent, RequestStatus } from 'product-comparison-component';
+
+const SwitchStatusScreen = ({ navigation }: SwitchStatusScreenProps) => {
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+      e.preventDefault();
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, [navigation]);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <SwitchStatusComponent
+        status={RequestStatus.success}
+        onConfirmed={() => navigation.navigate(Route.HOME_TAB)}
+      />
+    </SafeAreaView>
+  );
+};
+
+export default SwitchStatusScreen;
+```
 
 ### Add component to the config.json file manually
 
