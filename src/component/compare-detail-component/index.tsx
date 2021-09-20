@@ -3,7 +3,7 @@ import { ProductContext } from '../../context';
 import useMergeStyles from './styles';
 import { CompareDetailComponentProps } from './types';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
-import { Button, ThemeContext, Image } from 'react-native-theme-component';
+import { Button, Image } from 'react-native-theme-component';
 import { images } from '../../assets/images';
 import LinearGradient from 'react-native-linear-gradient';
 import ProductDetailModal from '../product-detail-modal';
@@ -11,8 +11,8 @@ import ProductDetailModal from '../product-detail-modal';
 const SwitchStatusComponent = (rootProps: CompareDetailComponentProps) => {
   const { props, style, detailModalStyle } = rootProps;
   const { getComparisonByWalletId } = useContext(ProductContext);
-  const { i18n } = useContext(ThemeContext);
   const [showMore, setshowMore] = useState(false);
+  const i18n = props.i18n;
 
   const comparisons = getComparisonByWalletId(props.walletId);
   const products = comparisons?.products ?? [];

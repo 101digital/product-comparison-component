@@ -1,5 +1,6 @@
 import { StyleProp, ViewStyle, TextStyle } from 'react-native';
 export type RecommandBannerComponentProps = {
+  i18n?: any;
   walletId: string;
   formatCurrency: (amount: number) => string;
   onTakeLook: () => void;

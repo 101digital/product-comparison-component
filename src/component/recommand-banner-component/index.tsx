@@ -3,13 +3,11 @@ import { TouchableOpacity, View, Text } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { ProductContext } from '../../context';
 import { RecommandBannerComponentProps, RecommandBannerComponentStyle } from './types';
-import { ThemeContext } from 'react-native-theme-component';
 import useMergeStyles from './styles';
 
 const RecommandBanner = (props: RecommandBannerComponentProps) => {
-  const { gradientColors, onTakeLook, message, formatCurrency, style, walletId } = props;
+  const { gradientColors, onTakeLook, message, formatCurrency, style, walletId, i18n } = props;
   const { getComparisonByWalletId } = useContext(ProductContext);
-  const { i18n } = useContext(ThemeContext);
 
   const comparisons = getComparisonByWalletId(walletId);
   const products = comparisons?.products ?? [];

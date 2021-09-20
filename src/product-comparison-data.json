@@ -1,6 +1,6 @@
 {
-  "id": "fddeac89-dae0-40ed-913b-afe990e5c1d7",
-  "name": "ProductComparisonComponent",
+  "id": "product-comparison-component",
+  "name": "Product Comparison Component",
   "repository": "https://github.com/101digital/product-comparison-component.git",
   "config": {
     "env": {
@@ -22,7 +22,7 @@
   ],
   "templates": [],
   "texts": {
-    "switch_save": {
+    "product_comparison_component": {
       "btn_request_switch": "Request Switch Now",
       "lbl_switch_title": "Switch to save on your %s",
       "lbl_benefits": "Benefits",

@@ -16,6 +16,7 @@ export type SwitchStatusComponentStyle = {
 };
 
 export type SwitchStatusComponentProps = {
+  i18n?: any;
   status: RequestStatus;
   title?: string;
   message?: string;

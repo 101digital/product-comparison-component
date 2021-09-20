@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 import useMergeStyles from './styles';
-import { ThemeContext, Button } from 'react-native-theme-component';
+import { Button } from 'react-native-theme-component';
 import { SuccessIcon, FailedIcon } from '../../assets/images';
 import { SwitchStatusComponentProps, SwitchStatusComponentStyle, RequestStatus } from './types';
 
 const SwitchStatusComponent = (props: SwitchStatusComponentProps) => {
   const {
+    i18n,
     status,
     style,
     successIcon,
@@ -16,7 +17,6 @@ const SwitchStatusComponent = (props: SwitchStatusComponentProps) => {
     onConfirmed,
     confirmTitle,
   } = props;
-  const { i18n } = useContext(ThemeContext);
   const styles: SwitchStatusComponentStyle = useMergeStyles(style);
 
   return (
