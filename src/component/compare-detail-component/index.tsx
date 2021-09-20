@@ -8,7 +8,7 @@ import { images } from '../../assets/images';
 import LinearGradient from 'react-native-linear-gradient';
 import ProductDetailModal from '../product-detail-modal';
 
-const SwitchStatusComponent = (rootProps: CompareDetailComponentProps) => {
+const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
   const { props, style, detailModalStyle } = rootProps;
   const { getComparisonByWalletId } = useContext(ProductContext);
   const [showMore, setshowMore] = useState(false);
@@ -152,4 +152,4 @@ const SwitchStatusComponent = (rootProps: CompareDetailComponentProps) => {
   );
 };
 
-export default SwitchStatusComponent;
+export default CompareDetailComponent;
