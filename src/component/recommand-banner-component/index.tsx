@@ -25,7 +25,7 @@ const RecommandBanner = (props: RecommandBannerComponentProps) => {
       return message;
     }
     return (
-      i18n?.t('switch_save.msg_switch_now') ??
+      i18n?.t('product_comparison_component.msg_switch_now') ??
       'You can save approximately %a per month by switching your %b to %c.'
     )
       .replace('%a', formatCurrency(products[0].monthlyRepayment - products[1].monthlyRepayment))
@@ -45,7 +45,7 @@ const RecommandBanner = (props: RecommandBannerComponentProps) => {
           <Text style={styles.messageTextStyle}>
             {getMessage()}{' '}
             <Text style={{ textDecorationLine: _decorationLine }}>
-              {i18n?.t('switch_save.btn_take_look') ?? 'Take a look'}
+              {i18n?.t('product_comparison_component.btn_take_look') ?? 'Take a look'}
             </Text>
           </Text>
         </View>

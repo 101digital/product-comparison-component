@@ -24,7 +24,7 @@ const SwitchStatusComponent = (props: SwitchStatusComponentProps) => {
       <View style={styles.contentContainerStyle}>
         <Text style={styles.titleTextStyle}>
           {title ??
-            i18n?.t('switch_save.msg_congratulations') ??
+            i18n?.t('product_comparison_component.msg_congratulations') ??
             'Congratulations!\nSwicth & Save Request Successful'}
         </Text>
         <View style={styles.iconContainerStyle}>
@@ -34,7 +34,7 @@ const SwitchStatusComponent = (props: SwitchStatusComponentProps) => {
         </View>
         <Text style={styles.messageTextStyle}>
           {message ??
-            i18n?.t('switch_save.msg_switch_successful') ??
+            i18n?.t('product_comparison_component.msg_switch_successful') ??
             'Your switch request has been submitted successfully. We will be in touch with you shortly.'}
         </Text>
       </View>
@@ -45,7 +45,7 @@ const SwitchStatusComponent = (props: SwitchStatusComponentProps) => {
               flex: 1,
             },
           }}
-          label={confirmTitle ?? i18n?.t('switch_save.btn_confirm_status') ?? 'Ok'}
+          label={confirmTitle ?? i18n?.t('product_comparison_component.btn_confirm_status') ?? 'Ok'}
           onPress={onConfirmed}
         />
       </View>

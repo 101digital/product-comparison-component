@@ -78,10 +78,9 @@ const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
     if (componentTitle) {
       return componentTitle;
     }
-    return (i18n?.t('switch_save.lbl_switch_title') ?? 'Switch to save on your %s').replace(
-      '%s',
-      comparisons?.accountSubtype ?? ''
-    );
+    return (
+      i18n?.t('product_comparison_component.lbl_switch_title') ?? 'Switch to save on your %s'
+    ).replace('%s', comparisons?.accountSubtype ?? '');
   };
 
   return (
@@ -107,11 +106,13 @@ const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
           </View>
           <View style={styles.benefitContainerStyle}>
             <Text style={styles.benefitTitleStyle}>
-              {benefitTitle ?? i18n?.t('switch_save.lbl_benefits') ?? 'Benefits'}
+              {benefitTitle ?? i18n?.t('product_comparison_component.lbl_benefits') ?? 'Benefits'}
             </Text>
             <View style={styles.benefitContentContainerStyle}>
               {renderItemBenefit(
-                interestRateTitle ?? i18n?.t('switch_save.lbl_interest_rate') ?? 'Interest rate',
+                interestRateTitle ??
+                  i18n?.t('product_comparison_component.lbl_interest_rate') ??
+                  'Interest rate',
                 parseFloat(products[0].rate).toFixed(2),
                 parseFloat(products[1].rate).toFixed(2)
               )}
@@ -120,7 +121,7 @@ const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
                 products[1].comparisonRate &&
                 renderItemBenefit(
                   comparisonRateTitle ??
-                    i18n?.t('switch_save.lbl_comparison_rate') ??
+                    i18n?.t('product_comparison_component.lbl_comparison_rate') ??
                     'Comparison rate',
                   products[0].comparisonRate.toFixed(2),
                   products[1].comparisonRate.toFixed(2)
@@ -132,7 +133,9 @@ const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
               onPress={onTapShowMoreDetail}
             >
               <Text style={styles.showDetailTextStyle}>
-                {showDetailTitle ?? i18n?.t('switch_save.btn_show_detail') ?? 'Show more Details >'}
+                {showDetailTitle ??
+                  i18n?.t('product_comparison_component.btn_show_detail') ??
+                  'Show more Details >'}
               </Text>
             </TouchableOpacity>
           </View>
@@ -141,7 +144,7 @@ const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
           <Button
             label={
               requestButtonTitle ??
-              i18n?.t('switch_save.btn_request_switch') ??
+              i18n?.t('product_comparison_component.btn_request_switch') ??
               'Request Switch Now'
             }
             onPress={onSwitchPressed}
