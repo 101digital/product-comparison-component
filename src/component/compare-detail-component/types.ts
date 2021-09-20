@@ -2,21 +2,19 @@ import { StyleProp, ViewStyle, TextStyle, ImageStyle, ImageURISource } from 'rea
 import { ProductDetailModalStyles } from '../product-detail-modal/types';
 
 export type CompareDetailComponentProps = {
-  props: {
-    i18n?: any;
-    walletId: string;
-    onSwitchPressed: () => void;
-    gradientColors?: string[];
-    actions: string[];
-    onPressedAction?: (name: string) => void;
-    componentTitle?: string;
-    benefitTitle?: string;
-    interestRateTitle?: string;
-    comparisonRateTitle?: string;
-    showDetailTitle?: string;
-    requestButtonTitle?: string;
-    defaultBankImage?: ImageURISource;
-  };
+  i18n?: any;
+  walletId: string;
+  onSwitchPressed: () => void;
+  gradientColors?: string[];
+  actions: string[];
+  onPressedAction?: (name: string) => void;
+  componentTitle?: string;
+  benefitTitle?: string;
+  interestRateTitle?: string;
+  comparisonRateTitle?: string;
+  showDetailTitle?: string;
+  requestButtonTitle?: string;
+  defaultBankImage?: ImageURISource;
   style?: CompareDetailComponentStyles;
   detailModalStyle?: ProductDetailModalStyles;
 };

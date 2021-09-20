@@ -9,12 +9,27 @@ import LinearGradient from 'react-native-linear-gradient';
 import ProductDetailModal from '../product-detail-modal';
 
 const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
-  const { props, style, detailModalStyle } = rootProps;
+  const {
+    i18n,
+    style,
+    detailModalStyle,
+    walletId,
+    defaultBankImage,
+    componentTitle,
+    gradientColors,
+    benefitTitle,
+    requestButtonTitle,
+    interestRateTitle,
+    comparisonRateTitle,
+    showDetailTitle,
+    onSwitchPressed,
+    actions,
+    onPressedAction,
+  } = rootProps;
   const { getComparisonByWalletId } = useContext(ProductContext);
   const [showMore, setshowMore] = useState(false);
-  const i18n = props.i18n;
 
-  const comparisons = getComparisonByWalletId(props.walletId);
+  const comparisons = getComparisonByWalletId(walletId);
   const products = comparisons?.products ?? [];
 
   const styles = useMergeStyles(style);
@@ -33,7 +48,7 @@ const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
         <Image
           resizeMode='contain'
           style={styles.bankImageStyle}
-          fallbackImage={props?.defaultBankImage ?? images.bank}
+          fallbackImage={defaultBankImage ?? images.bank}
           source={{ uri: bankLogo }}
         />
         <Text
@@ -60,8 +75,8 @@ const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
   };
 
   const getTitle = () => {
-    if (props.componentTitle) {
-      return props.componentTitle;
+    if (componentTitle) {
+      return componentTitle;
     }
     return (i18n?.t('switch_save.lbl_switch_title') ?? 'Switch to save on your %s').replace(
       '%s',
@@ -83,7 +98,7 @@ const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
             <Text style={styles.nextTextStyle}>{'>>'}</Text>
             <LinearGradient
               style={styles.bankContainerStyle}
-              colors={props.gradientColors ?? ['#1469b8', '#007ef2']}
+              colors={gradientColors ?? ['#1469b8', '#007ef2']}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
             >
@@ -92,13 +107,11 @@ const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
           </View>
           <View style={styles.benefitContainerStyle}>
             <Text style={styles.benefitTitleStyle}>
-              {props.benefitTitle ?? i18n?.t('switch_save.lbl_benefits') ?? 'Benefits'}
+              {benefitTitle ?? i18n?.t('switch_save.lbl_benefits') ?? 'Benefits'}
             </Text>
             <View style={styles.benefitContentContainerStyle}>
               {renderItemBenefit(
-                props.interestRateTitle ??
-                  i18n?.t('switch_save.lbl_interest_rate') ??
-                  'Interest rate',
+                interestRateTitle ?? i18n?.t('switch_save.lbl_interest_rate') ?? 'Interest rate',
                 parseFloat(products[0].rate).toFixed(2),
                 parseFloat(products[1].rate).toFixed(2)
               )}
@@ -106,7 +119,7 @@ const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
               {products[0].comparisonRate &&
                 products[1].comparisonRate &&
                 renderItemBenefit(
-                  props.comparisonRateTitle ??
+                  comparisonRateTitle ??
                     i18n?.t('switch_save.lbl_comparison_rate') ??
                     'Comparison rate',
                   products[0].comparisonRate.toFixed(2),
@@ -119,9 +132,7 @@ const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
               onPress={onTapShowMoreDetail}
             >
               <Text style={styles.showDetailTextStyle}>
-                {props.showDetailTitle ??
-                  i18n?.t('switch_save.btn_show_detail') ??
-                  'Show more Details >'}
+                {showDetailTitle ?? i18n?.t('switch_save.btn_show_detail') ?? 'Show more Details >'}
               </Text>
             </TouchableOpacity>
           </View>
@@ -129,11 +140,11 @@ const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
         <View style={styles.requestContainerStyle}>
           <Button
             label={
-              props.requestButtonTitle ??
+              requestButtonTitle ??
               i18n?.t('switch_save.btn_request_switch') ??
               'Request Switch Now'
             }
-            onPress={props.onSwitchPressed}
+            onPress={onSwitchPressed}
           />
         </View>
       </View>
@@ -141,11 +152,11 @@ const CompareDetailComponent = (rootProps: CompareDetailComponentProps) => {
         isVisible={showMore}
         onClose={() => setshowMore(false)}
         productName={products[1].productName}
-        actions={props.actions}
+        actions={actions}
         style={detailModalStyle}
         onPressedItem={(action) => {
           setshowMore(false);
-          props.onPressedAction?.(action);
+          onPressedAction?.(action);
         }}
       />
     </>
