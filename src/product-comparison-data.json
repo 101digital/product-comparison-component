@@ -1,0 +1,39 @@
+{
+  "id": "product-comparison-component",
+  "name": "Product Comparison Component",
+  "repository": "https://github.com/101digital/product-comparison-component.git",
+  "config": {
+    "env": {
+      "development": {
+        "productBaseUrl": "https://sandbox.101digital.io/wallet-service/1.0.0"
+      },
+      "staging": {
+        "productBaseUrl": "https://sandbox.101digital.io/wallet-service/1.0.0"
+      },
+      "production": {
+        "productBaseUrl": "https://api.101digital.io/wallet-service/v1.0"
+      }
+    }
+  },
+  "dependencies": [
+    { "name": "https://github.com/101digital/react-native-theme-component.git" },
+    { "name": "react-native-webview", "version": "^10.8.3" },
+    { "name": "react-native-linear-gradient", "version": "^2.5.6" }
+  ],
+  "templates": [],
+  "texts": {
+    "product_comparison_component": {
+      "btn_request_switch": "Request Switch Now",
+      "lbl_switch_title": "Switch to save on your %s",
+      "lbl_benefits": "Benefits",
+      "lbl_interest_rate": "Interest rate",
+      "lbl_comparison_rate": "Comparison rate",
+      "msg_congratulations": "Congratulations!\nSwicth & Save Request Successful",
+      "msg_switch_successful": "Your switch request has been submitted successfully. We will be in touch with you shortly.",
+      "btn_confirm_status": "Ok",
+      "btn_show_detail": "Show more Details >",
+      "msg_switch_now": "You can save approximately %a per month by switching your %b to %c.",
+      "btn_take_look": "Take a look"
+    }
+  }
+}
